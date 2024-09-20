@@ -10,10 +10,11 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import LowerHeader from "./LowerHeader"; 
 import { useContext } from "react"; //
 import { DataContext } from "../DataProvider/DataProvider";
+import {auth} from '../../Utility/fireBase'
 
 function Header() {
   // Accessing context data and dispatch function
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{user, basket }, dispatch] = useContext(DataContext);
 
   // Calculating total items in the basket
   const totalItem = basket?.reduce((amount, item) => {
@@ -44,6 +45,10 @@ function Header() {
           {/* Search bar section */}
           <select name="" id="">
             <option value="">All</option>
+            <option value="">Electronics</option>
+            <option value="">Women's Fashion</option>
+            <option value="">Men Fashion</option>
+            <option value="">Jewellery</option>
           </select>
           <input type="text" name="" id="" placeholder="search product" />
           {/* Icon for search */}
@@ -58,17 +63,26 @@ function Header() {
             >
               <img src={flag} alt="Flag" />
               <select name="" id="">
-                <option value="">EN</option>
+                <option value="English">EN</option>
+                <option value="espanol">ES</option>
               </select>
             </Link>
           </div>
           {/* Sign In link */}
-          <Link
-            to="https://www.amazon.com/gp/css/homepage.html?ref_=nav_youraccount_btn"
-            className={classes.sign}
-          >
-            <p>Sign In</p>
-            <span>Account & Lists</span>
+          <Link to={!user && "/Auth"} className={classes.sign}>
+            <div>
+              {user ? (
+                <>
+                  <p>Hello {user?.email?.split("@")[0]}</p>
+                  <span onClick={()=>auth.signOut()}>Sign Out</span>
+                </>
+              ) : (
+                <>
+                  <p> Hello, Sign In</p>
+                  <span>Account & Lists</span>
+                </>
+              )}
+            </div>
           </Link>
           {/* Returns & Orders link */}
           <Link to="/Orders">

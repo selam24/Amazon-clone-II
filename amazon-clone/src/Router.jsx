@@ -6,7 +6,7 @@ import Orders from "./pages/Orders/Orders";
 import Cart from "./pages/Cart/Cart";
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import Result from './pages/Results/Result'
-import SignIn from './pages/Auth/SignIn'
+import Auth from './pages/Auth/Auth'
 
 // Function component that sets up routing for the application
 function Routing() {
@@ -14,7 +14,7 @@ function Routing() {
     <Router> {/* Wraps the entire routing setup in a Router component */}
       <Routes> {/* Container for all route definitions */}
         <Route path="/" element={<Landing />} /> {/* Route for the homepage, renders the Landing component */}
-        <Route path="/Auth" element={<SignIn />} /> {/* Route for the authentication page, renders the SignIn component */}
+        <Route path="/Auth" element={<Auth />} /> {/* Route for the authentication page, renders the SignIn component */}
         <Route path="/Payment" element={<Payment />} /> {/* Route for the payment page, renders the Payment component */}
         <Route path="/Orders" element={<Orders />} /> {/* Route for the orders page, renders the Orders component */}
         <Route path="/Cart" element={<Cart />} /> {/* Route for the shopping cart page, renders the Cart component */}
