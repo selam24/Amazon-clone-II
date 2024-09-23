@@ -1,20 +1,20 @@
 // Importing React library and other necessary modules
 import React from "react";
-import classes from "./Header.module.css"; 
-import { Link } from "react-router-dom"; 
-import amazon from "../../assets/images/amazon.png"; 
-import flag from "../../assets/images/flag.jpg"; 
-import PlaceIcon from "@mui/icons-material/Place"; 
-import SearchIcon from "@mui/icons-material/Search"; 
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"; 
-import LowerHeader from "./LowerHeader"; 
+import classes from "./Header.module.css";
+import { Link } from "react-router-dom";
+import amazon from "../../assets/images/amazon.png";
+import flag from "../../assets/images/flag.jpg";
+import PlaceIcon from "@mui/icons-material/Place";
+import SearchIcon from "@mui/icons-material/Search";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import LowerHeader from "./LowerHeader";
 import { useContext } from "react"; //
 import { DataContext } from "../DataProvider/DataProvider";
-import {auth} from '../../Utility/fireBase'
+import { auth } from "../../Utility/fireBase";
 
 function Header() {
   // Accessing context data and dispatch function
-  const [{user, basket }, dispatch] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
 
   // Calculating total items in the basket
   const totalItem = basket?.reduce((amount, item) => {
@@ -52,7 +52,7 @@ function Header() {
           </select>
           <input type="text" name="" id="" placeholder="search product" />
           {/* Icon for search */}
-          <SearchIcon />
+          <SearchIcon style={{ fontSize: "38px" }} />
         </div>
         {/* Right side navigation links */}
         <div className={classes.order_container}>
@@ -74,7 +74,7 @@ function Header() {
               {user ? (
                 <>
                   <p>Hello {user?.email?.split("@")[0]}</p>
-                  <span onClick={()=>auth.signOut()}>Sign Out</span>
+                  <span onClick={() => auth.signOut()}>Sign Out</span>
                 </>
               ) : (
                 <>
@@ -102,4 +102,4 @@ function Header() {
   );
 }
 
-export default Header; 
+export default Header;
