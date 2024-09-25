@@ -1,9 +1,9 @@
-import { Type } from "./action.type"; 
+import { Type } from "./action.type";
 
 // Initial state for the reducer
 export const initialState = {
   basket: [], // The basket starts as an empty array
-  user: null
+  user: null,
 };
 
 // Reducer function to handle state changes based on actions
@@ -60,16 +60,20 @@ export const reducer = (state, action) => {
         ...state,
         basket: newBasket,
       };
-      case Type.SET_USER:
-        return {
-          ...state,
-          user:action.user
-        }
+    case Type.EMPTY_BASKET:
+      return {
+        ...state,
+        basket: [],
+      };
+
+    case Type.SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
 
     default:
       // Return the current state if action type does not match any case
       return state;
   }
 };
-
-

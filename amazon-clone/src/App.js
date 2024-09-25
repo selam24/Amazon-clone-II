@@ -6,26 +6,33 @@ import { Type } from "./Utility/action.type.js";
 import { auth } from "./Utility/fireBase.js";
 
 function App() {
-  const [{ user }, dispatch] = useContext(DataContext);
+  const [{ user }, dispatch] = useContext(DataContext); // Accessing user state and dispatch function from DataContext
+
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    // Setting up an authentication state listener
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // console.log(authUser)
+        // If a user is authenticated, dispatch the user object to the state
         dispatch({
           type: Type.SET_USER,
           user: authUser,
         });
       } else {
+        // If no user is authenticated, set user to null
         dispatch({
           type: Type.SET_USER,
           user: null,
         });
       }
     });
-  }, []);
+
+    // Clean up the listener on component unmount
+    return () => unsubscribe();
+  }, [dispatch]); // Adding dispatch to the dependency array
+
   return (
     <>
-      <Routing />
+      <Routing /> {/* Rendering the Routing component */}
     </>
   );
 }

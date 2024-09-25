@@ -14,7 +14,7 @@ import { auth } from "../../Utility/fireBase";
 
 function Header() {
   // Accessing context data and dispatch function
-  const [{ user, basket }, dispatch] = useContext(DataContext);
+  const [{ user, basket }] = useContext(DataContext);
 
   // Calculating total items in the basket
   const totalItem = basket?.reduce((amount, item) => {
@@ -48,7 +48,7 @@ function Header() {
             <option value="">Electronics</option>
             <option value="">Women's Fashion</option>
             <option value="">Men Fashion</option>
-            <option value="">Jewellery</option>
+            <option value="">Jewelry</option>
           </select>
           <input type="text" name="" id="" placeholder="search product" />
           {/* Icon for search */}
