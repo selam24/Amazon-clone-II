@@ -4,6 +4,7 @@ const logger = require("firebase-functions/logger"); // Logger for logging messa
 const express = require("express"); // Express framework for building the server
 const cors = require("cors"); // CORS middleware for handling cross-origin requests
 const dotenv = require("dotenv"); // Dotenv for managing environment variables
+const { setGlobalOptions } = require("firebase-functions/v2");
 
 // Loading environment variables from the .env file
 dotenv.config();
@@ -13,6 +14,8 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 // Creating an instance of an Express application
 const app = express();
+
+setGlobalOptions({maxInstances: 10})
 
 // Using CORS to allow requests from any origin
 app.use(cors({ origin: true }));
